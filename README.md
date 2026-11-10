@@ -12,6 +12,29 @@ The full write-up is [docs/REPORT.md](docs/REPORT.md).
 
 ---
 
+## Abstract
+
+Pearl's upcoming FP8 proof of useful work (cert v4) asks miners to compute dense FP8 matrix products. The verifier replays each winning tile bit-exactly using the rounding of an NVIDIA H100 or B200 tensor core, and a "jackpot policy" rejects sparse or low-entropy inputs. We ask whether an ASIC could mine this 100x more efficiently than a GPU, and whether that would pay.
+
+From the protocol source we find no algorithmic shortcut. Every ticket costs a genuine dense FP8 GEMM, so an ASIC's only lever is energy per multiply-accumulate. We built a bit-exact Rust model of a weight-stationary "DP32 atom" datapath that copies H100 rounding (30% cheaper than B200's for identical difficulty) and verified it bit-for-bit against Pearl's own verifier code. Around it we built a gate-level energy, area and cost model that uses switching activity measured in simulation.
+
+Three versioned designs were evaluated:
+- **PA-1**: N3 at nominal voltage. 20x an H100 at the wall, but too hot to cool.
+- **PA-2** (recommended): N3 near threshold, 0.46 V. **~61x an H100 and ~37x a B200** in net wall-plug efficiency, with a ±2x model band of 32–109x.
+- **PA-3**: N2 at 0.38 V with voltage-stacked boards. ~120x an H100, the only design to reach the 100x goal.
+
+So 100x is physically reachable, but only at the aggressive edge.
+
+Economically, the ASIC is 300–400x cheaper per unit of work than GPUs bought to mine. Whether it can compete with GPUs that mine as a by-product of paid inference depends on Pearl's mining overhead:
+- At **1%** overhead, inference-mined work is 4.7x cheaper than PA-2 (H100) and 7.7x cheaper (B200).
+- PA-2 breaks even with H100 inference-miners only at **~4.7%** overhead, and with B200s at **~7.7%**.
+
+Silicon, not electricity, dominates ASIC cost. That is why the cost-optimal design sits at ~60–80x efficiency rather than the maximum.
+
+We conclude that a Pearl FP8 ASIC is technically feasible and would dominate dedicated GPU mining. It cannot undercut inference-mined hashes at low overhead, though. Its viability depends on mining overhead, the size of the inference fleet running Pearl, and, above all, protocol stability: four consensus forks in three months, against an 18-month tape-out.
+
+---
+
 ## Key findings
 
 ### 1. The proof of work has no shortcut; only joules per FP8 MAC matter
