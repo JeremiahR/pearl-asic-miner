@@ -428,8 +428,11 @@ fn fig_frontier(res: &Results) -> (String, String) {
     // Regions relative to the PA-2 line.
     let ya = y.map(e_pa2);
     svg.rect(l, ya, r - l, b - ya, 0.0, "wash");
-    svg.text(r - 8.0, b - 10.0, "below the bold line: our ASIC is more efficient", "note", "end");
-    svg.text(r - 8.0, t + 14.0, "above it: inference GPUs mine Pearl more efficiently", "note", "end");
+    // Region labels: who wins on either side of our best ASIC's line.
+    svg.text(r - 12.0, t + 30.0, "GPUs WIN", "region", "end");
+    svg.text(r - 12.0, t + 48.0, "inference GPUs mine Pearl more efficiently than our ASIC", "regionsub", "end");
+    svg.text(l + 12.0, b - 30.0, "ASIC WINS", "region", "start");
+    svg.text(l + 12.0, b - 12.0, "our ASIC mines Pearl more efficiently (shaded)", "regionsub", "start");
     for v in [20.0, 50.0, 100.0, 200.0, 500.0, 1000.0] {
         svg.line(l, y.map(v), r, y.map(v), "grid");
         svg.text(l - 8.0, y.map(v) + 4.0, &format!("{v:.0}"), "tick", "end");
@@ -451,6 +454,8 @@ fn fig_frontier(res: &Results) -> (String, String) {
         svg.line(l, y.map(*v), r, y.map(*v), lc);
         svg.text(r + 8.0, y.map(*v) + 4.0, label, tc, "start");
     }
+    svg.text(r + 8.0, ya - 18.0, "▲ above: GPUs win", "lab", "start");
+    svg.text(r + 8.0, ya + 24.0, "▼ below: ASIC wins", "lab", "start");
 
     let mut csv = String::from("family,members,overhead_pct,effective_tflops_per_w_low,effective_tflops_per_w_high,vs_pa2_energy_low,vs_pa2_energy_high\n");
     let mut notes = Vec::new();
@@ -478,7 +483,7 @@ fn fig_frontier(res: &Results) -> (String, String) {
         let label = format!("{}: {:.0} → {:.0} TF/W", f.name, mid / 0.01, mid / 0.05);
         match i {
             0 => svg.text(x.map(0.029), y.map(f.wall_tfw_lo / 0.029) + 18.0, &label, "val", "end"),
-            1 => svg.text(x.map(0.040), y.map(f.wall_tfw_hi / 0.040) - 10.0, &label, "val", "start"),
+            1 => svg.text(x.map(0.049), y.map(f.wall_tfw_lo / 0.049) + 18.0, &label, "val", "end"),
             _ => svg.text(x.map(0.013), y.map(f.wall_tfw_hi / 0.013) - 10.0, &format!("{label} (power unconfirmed)"), "val", "start"),
         }
         // Crossover with the PA-2 line (overhead where GPU effective = PA-2).

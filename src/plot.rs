@@ -55,7 +55,7 @@ fn color_rules(t: &Tokens) -> String {
          .f1{{fill:{s1}}} .f2{{fill:{s2}}} .f3{{fill:{s3}}} .f4{{fill:{s4}}} \
          .l1,.w1{{stroke:{s1}}} .l2,.w2{{stroke:{s2}}} .l3{{stroke:{s3}}} \
          .b1{{fill:{s1};fill-opacity:0.2}} .b2{{fill:{s2};fill-opacity:0.2}} .b3{{fill:{s3};fill-opacity:0.2}} \
-         .refbold{{stroke:{is}}} .strong{{fill:{is}}}",
+         .refbold{{stroke:{is}}} .strong,.region{{fill:{is}}} .regionsub{{fill:{i2}}}",
         is = t.ink_strong,
         sf = t.surface, i1 = t.ink1, i2 = t.ink2, mu = t.muted, gr = t.grid, ba = t.base, wa = t.wash
     )
@@ -68,7 +68,7 @@ fn style() -> String {
          .tick{{font-size:11px;font-variant-numeric:tabular-nums}} .note{{font-size:11px}} \
          .grid,.base,.ref{{stroke-width:1}} .ring{{stroke-width:2}} \
          .l1,.l2,.l3{{stroke-width:2;fill:none;stroke-linejoin:round;stroke-linecap:round}} \
-         .refbold{{stroke-width:2.5}} .strong{{font-size:12.5px;font-weight:600}} .b1,.b2,.b3{{stroke:none}} \
+         .refbold{{stroke-width:2.5}} .strong{{font-size:12.5px;font-weight:600}} .region{{font-size:22px;font-weight:700;letter-spacing:0.5px}} .regionsub{{font-size:12px}} .b1,.b2,.b3{{stroke:none}} \
          .w1,.w2{{stroke-width:2;stroke-linecap:round}}\n{}\n@media (prefers-color-scheme: dark) {{ {} }}",
         color_rules(&LIGHT),
         color_rules(&DARK)
