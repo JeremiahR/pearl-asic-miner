@@ -1,0 +1,6 @@
+name,kind,wall_tflops_per_w,low,high,x_h100
+PA-3 Stacked N2,asic,185.44,98.32,332.96,119.5
+PA-2 Near-threshold,asic,94.12,49.96,168.70,60.6
+PA-1 Baseline,asic,31.34,16.76,55.47,20.2
+B200,gpu,2.52,2.52,2.52,1.62
+H100 SXM,gpu,1.55,1.55,1.55,1.00

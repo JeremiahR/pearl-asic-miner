@@ -1,0 +1,4 @@
+version,logic_fj,registers_clock_fj,wires_fj,leak_overhead_fj,chip_fj,wall_fj
+PA-1,36.56,8.38,6.45,2.80,54.19,63.82
+PA-2,13.75,1.93,1.90,1.04,18.62,21.25
+PA-3,7.51,0.72,0.95,0.57,9.75,10.79

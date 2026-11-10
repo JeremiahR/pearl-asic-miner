@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="310" viewBox="0 0 780 310" role="img" aria-label="Energy breakdown per FP8 MAC for each ASIC design version">
+<title>Energy breakdown per FP8 MAC for each ASIC design version</title>
+<style>text{font-family:system-ui, -apple-system, 'Segoe UI', sans-serif} .title{font-size:16px;font-weight:600} .sub{font-size:12px} .lab{font-size:12px} .lab2{font-size:11px} .val{font-size:11.5px;font-variant-numeric:tabular-nums} .tick{font-size:11px;font-variant-numeric:tabular-nums} .note{font-size:11px} .grid,.base,.ref{stroke-width:1} .ring{stroke-width:2} .l1,.l2{stroke-width:2;fill:none;stroke-linejoin:round;stroke-linecap:round} .w1,.w2{stroke-width:2;stroke-linecap:round}
+.bg{fill:#fcfcfb} .title,.lab,.val{fill:#0b0b0b} .sub,.lab2{fill:#52514e} .tick,.note{fill:#898781} .grid{stroke:#e1e0d9} .base{stroke:#c3c2b7} .ref{stroke:#52514e} .wash{fill:rgba(11,11,11,0.05)} .ring{stroke:#fcfcfb} .f1{fill:#2a78d6} .f2{fill:#eb6834} .f3{fill:#1baf7a} .f4{fill:#eda100} .l1,.w1{stroke:#2a78d6} .l2,.w2{stroke:#eb6834}
+@media (prefers-color-scheme: dark) { .bg{fill:#1a1a19} .title,.lab,.val{fill:#f0efec} .sub,.lab2{fill:#c3c2b7} .tick,.note{fill:#898781} .grid{stroke:#2c2c2a} .base{stroke:#383835} .ref{stroke:#c3c2b7} .wash{fill:rgba(255,255,255,0.06)} .ring{stroke:#1a1a19} .f1{fill:#3987e5} .f2{fill:#d95926} .f3{fill:#199e70} .f4{fill:#c98500} .l1,.w1{stroke:#3987e5} .l2,.w2{stroke:#d95926} }</style>
+<rect x="0.0" y="0.0" width="780.0" height="310.0" rx="0" class="bg"/>
+<text x="20.0" y="28.0" class="title" text-anchor="start">Where the energy goes</text>
+<text x="20.0" y="47.0" class="sub" text-anchor="start">Chip energy per FP8 MAC (fJ), by block. For scale, an H100 spends 707 fJ/MAC at the board.</text>
+<rect x="20.0" y="65.0" width="10.0" height="10.0" rx="2" class="f1"/>
+<text x="35.0" y="74.0" class="lab" text-anchor="start">datapath logic</text>
+<rect x="134.4" y="65.0" width="10.0" height="10.0" rx="2" class="f2"/>
+<text x="149.4" y="74.0" class="lab" text-anchor="start">registers + clock</text>
+<rect x="268.6" y="65.0" width="10.0" height="10.0" rx="2" class="f3"/>
+<text x="283.6" y="74.0" class="lab" text-anchor="start">operand wires</text>
+<rect x="376.4" y="65.0" width="10.0" height="10.0" rx="2" class="f4"/>
+<text x="391.4" y="74.0" class="lab" text-anchor="start">leakage + A′ gen + IO</text>
+<line x1="170.0" y1="90.0" x2="170.0" y2="246.0" class="base"/>
+<text x="170.0" y="262.0" class="tick" text-anchor="middle">0</text>
+<line x1="251.7" y1="90.0" x2="251.7" y2="246.0" class="grid"/>
+<text x="251.7" y="262.0" class="tick" text-anchor="middle">10</text>
+<line x1="333.3" y1="90.0" x2="333.3" y2="246.0" class="grid"/>
+<text x="333.3" y="262.0" class="tick" text-anchor="middle">20</text>
+<line x1="415.0" y1="90.0" x2="415.0" y2="246.0" class="grid"/>
+<text x="415.0" y="262.0" class="tick" text-anchor="middle">30</text>
+<line x1="496.7" y1="90.0" x2="496.7" y2="246.0" class="grid"/>
+<text x="496.7" y="262.0" class="tick" text-anchor="middle">40</text>
+<line x1="578.3" y1="90.0" x2="578.3" y2="246.0" class="grid"/>
+<text x="578.3" y="262.0" class="tick" text-anchor="middle">50</text>
+<line x1="660.0" y1="90.0" x2="660.0" y2="246.0" class="grid"/>
+<text x="660.0" y="262.0" class="tick" text-anchor="middle">60</text>
+<text x="660.0" y="280.0" class="note" text-anchor="end">fJ per MAC (chip)</text>
+<text x="20.0" y="119.0" class="lab" text-anchor="start">PA-1 Baseline</text>
+<rect x="170.0" y="106.0" width="296.6" height="22.0" rx="0" class="f1"/>
+<rect x="468.6" y="106.0" width="66.4" height="22.0" rx="0" class="f2"/>
+<rect x="537.0" y="106.0" width="50.7" height="22.0" rx="0" class="f3"/>
+<path d="M589.7,106.0 H606.5 Q610.5,106.0 610.5,110.0 V124.0 Q610.5,128.0 606.5,128.0 H589.7 Z" class="f4"/>
+<text x="620.5" y="121.0" class="val" text-anchor="start">54.2 fJ chip · 63.8 wall</text>
+<text x="20.0" y="169.0" class="lab" text-anchor="start">PA-2 Near-threshold</text>
+<rect x="170.0" y="156.0" width="110.3" height="22.0" rx="0" class="f1"/>
+<rect x="282.3" y="156.0" width="13.8" height="22.0" rx="0" class="f2"/>
+<rect x="298.1" y="156.0" width="13.5" height="22.0" rx="0" class="f3"/>
+<path d="M313.6,156.0 H316.8 Q320.0,156.0 320.0,159.2 V174.8 Q320.0,178.0 316.8,178.0 H313.6 Z" class="f4"/>
+<text x="330.0" y="171.0" class="val" text-anchor="start">18.6 fJ chip · 21.2 wall</text>
+<text x="20.0" y="219.0" class="lab" text-anchor="start">PA-3 Stacked N2</text>
+<rect x="170.0" y="206.0" width="59.3" height="22.0" rx="0" class="f1"/>
+<rect x="231.3" y="206.0" width="3.9" height="22.0" rx="0" class="f2"/>
+<rect x="237.2" y="206.0" width="5.8" height="22.0" rx="0" class="f3"/>
+<path d="M245.0,206.0 H246.3 Q247.6,206.0 247.6,207.3 V226.7 Q247.6,228.0 246.3,228.0 H245.0 Z" class="f4"/>
+<text x="257.6" y="221.0" class="val" text-anchor="start">9.7 fJ chip · 10.8 wall</text>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="440" viewBox="0 0 780 440" role="img" aria-label="Inference-GPU marginal cost at 1-5% mining overhead vs ASIC design versions">
+<title>Inference-GPU marginal cost at 1-5% mining overhead vs ASIC design versions</title>
+<style>text{font-family:system-ui, -apple-system, 'Segoe UI', sans-serif} .title{font-size:16px;font-weight:600} .sub{font-size:12px} .lab{font-size:12px} .lab2{font-size:11px} .val{font-size:11.5px;font-variant-numeric:tabular-nums} .tick{font-size:11px;font-variant-numeric:tabular-nums} .note{font-size:11px} .grid,.base,.ref{stroke-width:1} .ring{stroke-width:2} .l1,.l2{stroke-width:2;fill:none;stroke-linejoin:round;stroke-linecap:round} .w1,.w2{stroke-width:2;stroke-linecap:round}
+.bg{fill:#fcfcfb} .title,.lab,.val{fill:#0b0b0b} .sub,.lab2{fill:#52514e} .tick,.note{fill:#898781} .grid{stroke:#e1e0d9} .base{stroke:#c3c2b7} .ref{stroke:#52514e} .wash{fill:rgba(11,11,11,0.05)} .ring{stroke:#fcfcfb} .f1{fill:#2a78d6} .f2{fill:#eb6834} .f3{fill:#1baf7a} .f4{fill:#eda100} .l1,.w1{stroke:#2a78d6} .l2,.w2{stroke:#eb6834}
+@media (prefers-color-scheme: dark) { .bg{fill:#1a1a19} .title,.lab,.val{fill:#f0efec} .sub,.lab2{fill:#c3c2b7} .tick,.note{fill:#898781} .grid{stroke:#2c2c2a} .base{stroke:#383835} .ref{stroke:#c3c2b7} .wash{fill:rgba(255,255,255,0.06)} .ring{stroke:#1a1a19} .f1{fill:#3987e5} .f2{fill:#d95926} .f3{fill:#199e70} .f4{fill:#c98500} .l1,.w1{stroke:#3987e5} .l2,.w2{stroke:#d95926} }</style>
+<rect x="0.0" y="0.0" width="780.0" height="440.0" rx="0" class="bg"/>
+<text x="20.0" y="28.0" class="title" text-anchor="start">How the answer depends on Pearl's mining overhead</text>
+<text x="20.0" y="47.0" class="sub" text-anchor="start">Marginal cost of Pearl work for GPUs already doing FP8 inference, at 1–5% overhead, vs each ASIC version's total cost.</text>
+<rect x="20.0" y="63.0" width="10.0" height="10.0" rx="2" class="f1"/>
+<text x="35.0" y="72.0" class="lab" text-anchor="start">H100 doing inference</text>
+<rect x="174.0" y="63.0" width="10.0" height="10.0" rx="2" class="f2"/>
+<text x="189.0" y="72.0" class="lab" text-anchor="start">B200 doing inference</text>
+<line x1="90.0" y1="365.1" x2="590.0" y2="365.1" class="grid"/>
+<text x="82.0" y="369.1" class="tick" text-anchor="end">$0.00005</text>
+<line x1="90.0" y1="306.4" x2="590.0" y2="306.4" class="grid"/>
+<text x="82.0" y="310.4" class="tick" text-anchor="end">$0.0001</text>
+<line x1="90.0" y1="247.7" x2="590.0" y2="247.7" class="grid"/>
+<text x="82.0" y="251.7" class="tick" text-anchor="end">$0.0002</text>
+<line x1="90.0" y1="170.1" x2="590.0" y2="170.1" class="grid"/>
+<text x="82.0" y="174.1" class="tick" text-anchor="end">$0.0005</text>
+<line x1="90.0" y1="111.4" x2="590.0" y2="111.4" class="grid"/>
+<text x="82.0" y="115.4" class="tick" text-anchor="end">$0.001</text>
+<text x="90.0" y="400.0" class="tick" text-anchor="middle">1%</text>
+<text x="215.0" y="400.0" class="tick" text-anchor="middle">2%</text>
+<text x="340.0" y="400.0" class="tick" text-anchor="middle">3%</text>
+<text x="465.0" y="400.0" class="tick" text-anchor="middle">4%</text>
+<text x="590.0" y="400.0" class="tick" text-anchor="middle">5%</text>
+<line x1="90.0" y1="384.0" x2="590.0" y2="384.0" class="base"/>
+<text x="590.0" y="418.0" class="note" text-anchor="end">Pearl mining overhead on an inference GPU</text>
+<line x1="90.0" y1="130.7" x2="590.0" y2="130.7" class="ref"/>
+<text x="596.0" y="134.7" class="lab2" text-anchor="start">ASIC PA-1 $0.00080</text>
+<line x1="90.0" y1="184.2" x2="590.0" y2="184.2" class="ref"/>
+<text x="596.0" y="188.2" class="lab2" text-anchor="start">ASIC PA-2 $0.00042</text>
+<text x="596.0" y="202.2" class="lab2" text-anchor="start">ASIC PA-3 $0.00043</text>
+<polyline points="90.0,315.8 215.0,257.1 340.0,222.8 465.0,198.4 590.0,179.5" class="l1"/>
+<circle cx="90.0" cy="315.8" r="4.5" class="f1 ring"/>
+<circle cx="215.0" cy="257.1" r="4.5" class="f1 ring"/>
+<circle cx="340.0" cy="222.8" r="4.5" class="f1 ring"/>
+<circle cx="465.0" cy="198.4" r="4.5" class="f1 ring"/>
+<circle cx="590.0" cy="179.5" r="4.5" class="f1 ring"/>
+<text x="582.0" y="167.5" class="val" text-anchor="end">H100 $0.00045</text>
+<line x1="556.4" y1="96.0" x2="556.4" y2="184.2" class="ref"/>
+<circle cx="556.4" cy="184.2" r="4.5" class="f1 ring"/>
+<text x="550.4" y="108.0" class="lab2" text-anchor="end">PA-2 breaks even with H100 at 4.7%</text>
+<polyline points="90.0,356.8 215.0,298.1 340.0,263.7 465.0,239.4 590.0,220.5" class="l2"/>
+<circle cx="90.0" cy="356.8" r="4.5" class="f2 ring"/>
+<circle cx="215.0" cy="298.1" r="4.5" class="f2 ring"/>
+<circle cx="340.0" cy="263.7" r="4.5" class="f2 ring"/>
+<circle cx="465.0" cy="239.4" r="4.5" class="f2 ring"/>
+<circle cx="590.0" cy="220.5" r="4.5" class="f2 ring"/>
+<text x="582.0" y="208.5" class="val" text-anchor="end">B200 $0.00028</text>
+<text x="96.0" y="376.0" class="note" text-anchor="start">Where a GPU line sits below an ASIC line, inference-mined work is cheaper than that ASIC.</text>
+</svg>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="432" viewBox="0 0 780 432" role="img" aria-label="Cost per EFLOP of Pearl work for GPUs and ASIC design versions">
+<title>Cost per EFLOP of Pearl work for GPUs and ASIC design versions</title>
+<style>text{font-family:system-ui, -apple-system, 'Segoe UI', sans-serif} .title{font-size:16px;font-weight:600} .sub{font-size:12px} .lab{font-size:12px} .lab2{font-size:11px} .val{font-size:11.5px;font-variant-numeric:tabular-nums} .tick{font-size:11px;font-variant-numeric:tabular-nums} .note{font-size:11px} .grid,.base,.ref{stroke-width:1} .ring{stroke-width:2} .l1,.l2{stroke-width:2;fill:none;stroke-linejoin:round;stroke-linecap:round} .w1,.w2{stroke-width:2;stroke-linecap:round}
+.bg{fill:#fcfcfb} .title,.lab,.val{fill:#0b0b0b} .sub,.lab2{fill:#52514e} .tick,.note{fill:#898781} .grid{stroke:#e1e0d9} .base{stroke:#c3c2b7} .ref{stroke:#52514e} .wash{fill:rgba(11,11,11,0.05)} .ring{stroke:#fcfcfb} .f1{fill:#2a78d6} .f2{fill:#eb6834} .f3{fill:#1baf7a} .f4{fill:#eda100} .l1,.w1{stroke:#2a78d6} .l2,.w2{stroke:#eb6834}
+@media (prefers-color-scheme: dark) { .bg{fill:#1a1a19} .title,.lab,.val{fill:#f0efec} .sub,.lab2{fill:#c3c2b7} .tick,.note{fill:#898781} .grid{stroke:#2c2c2a} .base{stroke:#383835} .ref{stroke:#c3c2b7} .wash{fill:rgba(255,255,255,0.06)} .ring{stroke:#1a1a19} .f1{fill:#3987e5} .f2{fill:#d95926} .f3{fill:#199e70} .f4{fill:#c98500} .l1,.w1{stroke:#3987e5} .l2,.w2{stroke:#d95926} }</style>
+<rect x="0.0" y="0.0" width="780.0" height="432.0" rx="0" class="bg"/>
+<text x="20.0" y="28.0" class="title" text-anchor="start">What a unit of Pearl work costs each kind of miner</text>
+<text x="20.0" y="47.0" class="sub" text-anchor="start">USD per EFLOP (10¹⁸ FP8 FLOP), log scale. $0.05/kWh, 3-year life. Lower is better.</text>
+<rect x="20.0" y="65.0" width="10.0" height="10.0" rx="2" class="f1"/>
+<text x="35.0" y="74.0" class="lab" text-anchor="start">ASIC</text>
+<rect x="68.4" y="65.0" width="10.0" height="10.0" rx="2" class="f2"/>
+<text x="83.4" y="74.0" class="lab" text-anchor="start">GPU</text>
+<line x1="296.8" y1="90.0" x2="296.8" y2="376.0" class="grid"/>
+<text x="296.8" y="392.0" class="tick" text-anchor="middle">$0.0001</text>
+<line x1="392.3" y1="90.0" x2="392.3" y2="376.0" class="grid"/>
+<text x="392.3" y="392.0" class="tick" text-anchor="middle">$0.001</text>
+<line x1="487.7" y1="90.0" x2="487.7" y2="376.0" class="grid"/>
+<text x="487.7" y="392.0" class="tick" text-anchor="middle">$0.01</text>
+<line x1="583.2" y1="90.0" x2="583.2" y2="376.0" class="grid"/>
+<text x="583.2" y="392.0" class="tick" text-anchor="middle">$0.1</text>
+<line x1="230.0" y1="376.0" x2="650.0" y2="376.0" class="base"/>
+<text x="20.0" y="115.0" class="lab" text-anchor="start">H100 SXM bought to mine</text>
+<text x="20.0" y="129.0" class="lab2" text-anchor="start">energy + GPU capex</text>
+<line x1="230.0" y1="116.0" x2="607.0" y2="116.0" class="grid"/>
+<circle cx="607.0" cy="116.0" r="6" class="f2 ring"/>
+<text x="619.0" y="120.0" class="val" text-anchor="start">$0.18</text>
+<text x="20.0" y="155.0" class="lab" text-anchor="start">B200 bought to mine</text>
+<text x="20.0" y="169.0" class="lab2" text-anchor="start">energy + GPU capex</text>
+<line x1="230.0" y1="156.0" x2="589.7" y2="156.0" class="grid"/>
+<circle cx="589.7" cy="156.0" r="6" class="f2 ring"/>
+<text x="601.7" y="160.0" class="val" text-anchor="start">$0.12</text>
+<text x="20.0" y="195.0" class="lab" text-anchor="start">ASIC PA-1 Baseline</text>
+<text x="20.0" y="209.0" class="lab2" text-anchor="start">energy + chip/board capex</text>
+<line x1="230.0" y1="196.0" x2="382.8" y2="196.0" class="grid"/>
+<circle cx="382.8" cy="196.0" r="6" class="f1 ring"/>
+<text x="394.8" y="200.0" class="val" text-anchor="start">$0.00080</text>
+<text x="20.0" y="235.0" class="lab" text-anchor="start">ASIC PA-2 Near-threshold</text>
+<text x="20.0" y="249.0" class="lab2" text-anchor="start">energy + chip/board capex</text>
+<line x1="230.0" y1="236.0" x2="356.6" y2="236.0" class="grid"/>
+<circle cx="356.6" cy="236.0" r="6" class="f1 ring"/>
+<text x="368.6" y="240.0" class="val" text-anchor="start">$0.00042</text>
+<text x="20.0" y="275.0" class="lab" text-anchor="start">ASIC PA-3 Stacked N2</text>
+<text x="20.0" y="289.0" class="lab2" text-anchor="start">energy + chip/board capex</text>
+<line x1="230.0" y1="276.0" x2="357.0" y2="276.0" class="grid"/>
+<circle cx="357.0" cy="276.0" r="6" class="f1 ring"/>
+<text x="369.0" y="280.0" class="val" text-anchor="start">$0.00043</text>
+<text x="20.0" y="315.0" class="lab" text-anchor="start">H100 SXM doing inference</text>
+<text x="20.0" y="329.0" class="lab2" text-anchor="start">1% marginal energy only</text>
+<line x1="230.0" y1="316.0" x2="292.1" y2="316.0" class="grid"/>
+<circle cx="292.1" cy="316.0" r="6" class="f2 ring"/>
+<text x="304.1" y="320.0" class="val" text-anchor="start">$0.000089</text>
+<text x="20.0" y="355.0" class="lab" text-anchor="start">B200 doing inference</text>
+<text x="20.0" y="369.0" class="lab2" text-anchor="start">1% marginal energy only</text>
+<line x1="230.0" y1="356.0" x2="272.1" y2="356.0" class="grid"/>
+<circle cx="272.1" cy="356.0" r="6" class="f2 ring"/>
+<text x="284.1" y="360.0" class="val" text-anchor="start">$0.000055</text>
+</svg>

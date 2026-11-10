@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="430" viewBox="0 0 780 430" role="img" aria-label="Total cost per EFLOP vs core voltage for N3 and N2 ASICs, with GPU inference floors">
+<title>Total cost per EFLOP vs core voltage for N3 and N2 ASICs, with GPU inference floors</title>
+<style>text{font-family:system-ui, -apple-system, 'Segoe UI', sans-serif} .title{font-size:16px;font-weight:600} .sub{font-size:12px} .lab{font-size:12px} .lab2{font-size:11px} .val{font-size:11.5px;font-variant-numeric:tabular-nums} .tick{font-size:11px;font-variant-numeric:tabular-nums} .note{font-size:11px} .grid,.base,.ref{stroke-width:1} .ring{stroke-width:2} .l1,.l2{stroke-width:2;fill:none;stroke-linejoin:round;stroke-linecap:round} .w1,.w2{stroke-width:2;stroke-linecap:round}
+.bg{fill:#fcfcfb} .title,.lab,.val{fill:#0b0b0b} .sub,.lab2{fill:#52514e} .tick,.note{fill:#898781} .grid{stroke:#e1e0d9} .base{stroke:#c3c2b7} .ref{stroke:#52514e} .wash{fill:rgba(11,11,11,0.05)} .ring{stroke:#fcfcfb} .f1{fill:#2a78d6} .f2{fill:#eb6834} .f3{fill:#1baf7a} .f4{fill:#eda100} .l1,.w1{stroke:#2a78d6} .l2,.w2{stroke:#eb6834}
+@media (prefers-color-scheme: dark) { .bg{fill:#1a1a19} .title,.lab,.val{fill:#f0efec} .sub,.lab2{fill:#c3c2b7} .tick,.note{fill:#898781} .grid{stroke:#2c2c2a} .base{stroke:#383835} .ref{stroke:#c3c2b7} .wash{fill:rgba(255,255,255,0.06)} .ring{stroke:#1a1a19} .f1{fill:#3987e5} .f2{fill:#d95926} .f3{fill:#199e70} .f4{fill:#c98500} .l1,.w1{stroke:#3987e5} .l2,.w2{stroke:#d95926} }</style>
+<rect x="0.0" y="0.0" width="780.0" height="430.0" rx="0" class="bg"/>
+<text x="20.0" y="28.0" class="title" text-anchor="start">Cheapest operating point: total cost of Pearl work vs core voltage</text>
+<text x="20.0" y="47.0" class="sub" text-anchor="start">USD per EFLOP (energy + 3-year capex), log scale. Lower is better.</text>
+<rect x="20.0" y="63.0" width="10.0" height="10.0" rx="2" class="f1"/>
+<text x="35.0" y="72.0" class="lab" text-anchor="start">N3 ASIC</text>
+<rect x="88.2" y="63.0" width="10.0" height="10.0" rx="2" class="f2"/>
+<text x="103.2" y="72.0" class="lab" text-anchor="start">N2 ASIC</text>
+<rect x="462.3" y="92.0" width="197.7" height="282.0" rx="0" class="wash"/>
+<text x="468.3" y="106.0" class="note" text-anchor="start">&gt; 1 W/mm²: too hot to cool</text>
+<line x1="80.0" y1="356.6" x2="660.0" y2="356.6" class="grid"/>
+<text x="72.0" y="360.6" class="tick" text-anchor="end">$0.00005</text>
+<line x1="80.0" y1="302.7" x2="660.0" y2="302.7" class="grid"/>
+<text x="72.0" y="306.7" class="tick" text-anchor="end">$0.0001</text>
+<line x1="80.0" y1="248.8" x2="660.0" y2="248.8" class="grid"/>
+<text x="72.0" y="252.8" class="tick" text-anchor="end">$0.0002</text>
+<line x1="80.0" y1="177.5" x2="660.0" y2="177.5" class="grid"/>
+<text x="72.0" y="181.5" class="tick" text-anchor="end">$0.0005</text>
+<line x1="80.0" y1="123.5" x2="660.0" y2="123.5" class="grid"/>
+<text x="72.0" y="127.5" class="tick" text-anchor="end">$0.001</text>
+<text x="93.2" y="390.0" class="tick" text-anchor="middle">0.35</text>
+<text x="159.1" y="390.0" class="tick" text-anchor="middle">0.40</text>
+<text x="225.0" y="390.0" class="tick" text-anchor="middle">0.45</text>
+<text x="290.9" y="390.0" class="tick" text-anchor="middle">0.50</text>
+<text x="356.8" y="390.0" class="tick" text-anchor="middle">0.55</text>
+<text x="422.7" y="390.0" class="tick" text-anchor="middle">0.60</text>
+<text x="488.6" y="390.0" class="tick" text-anchor="middle">0.65</text>
+<text x="554.5" y="390.0" class="tick" text-anchor="middle">0.70</text>
+<text x="620.5" y="390.0" class="tick" text-anchor="middle">0.75</text>
+<line x1="80.0" y1="374.0" x2="660.0" y2="374.0" class="base"/>
+<text x="660.0" y="408.0" class="note" text-anchor="end">core voltage (V)</text>
+<line x1="80.0" y1="311.4" x2="660.0" y2="311.4" class="ref"/>
+<text x="666.0" y="315.4" class="lab2" text-anchor="start">H100 inference</text>
+<text x="666.0" y="328.4" class="lab2" text-anchor="start">by-product $0.000089</text>
+<line x1="80.0" y1="349.0" x2="660.0" y2="349.0" class="ref"/>
+<text x="666.0" y="353.0" class="lab2" text-anchor="start">B200 inference</text>
+<text x="666.0" y="366.0" class="lab2" text-anchor="start">by-product $0.000055</text>
+<polyline points="80.0,118.3 106.4,150.1 132.7,168.4 159.1,179.3 185.5,185.7 211.8,189.1 238.2,190.4 264.5,190.3 290.9,189.2 317.3,187.4 343.6,185.1 370.0,182.3 396.4,179.3 422.7,176.1 449.1,172.8 475.5,169.4 501.8,165.9 528.2,162.4 554.5,158.9 580.9,155.4 607.3,151.9 633.6,148.4 660.0,144.9" class="l1"/>
+<circle cx="238.2" cy="190.4" r="6" class="f1 ring"/>
+<text x="238.2" y="176.4" class="val" text-anchor="middle">N3 optimum 0.46 V: $0.00042</text>
+<text x="666.0" y="148.9" class="lab" text-anchor="start">N3 (2-col PE)</text>
+<polyline points="80.0,157.6 106.4,176.9 132.7,189.0 159.1,196.6 185.5,201.3 211.8,203.8 238.2,204.8 264.5,204.7 290.9,203.8 317.3,202.2 343.6,200.1 370.0,197.7 396.4,195.0 422.7,192.1 449.1,189.1 475.5,185.9 501.8,182.7 528.2,179.5 554.5,176.2 580.9,172.9 607.3,169.6 633.6,166.3 660.0,163.0" class="l2"/>
+<circle cx="238.2" cy="204.8" r="6" class="f2 ring"/>
+<text x="238.2" y="226.8" class="val" text-anchor="middle">N2 optimum 0.46 V: $0.00035</text>
+<text x="666.0" y="167.0" class="lab" text-anchor="start">N2 (4-col PE)</text>
+</svg>

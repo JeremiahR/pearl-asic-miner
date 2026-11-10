@@ -1,0 +1,8 @@
+miner,basis,energy_usd,capex_usd,total_usd
+H100 SXM bought to mine,energy + GPU capex,0.008948,0.168549,0.177497
+B200 bought to mine,energy + GPU capex,0.005517,0.111186,0.116703
+ASIC PA-1 Baseline,energy + chip/board capex,0.000443,0.000353,0.000797
+ASIC PA-2 Near-threshold,energy + chip/board capex,0.000148,0.000276,0.000423
+ASIC PA-3 Stacked N2,energy + chip/board capex,0.000075,0.000353,0.000427
+H100 SXM doing inference,1% marginal energy only,0.000089,0.000000,0.000089
+B200 doing inference,1% marginal energy only,0.000055,0.000000,0.000055
