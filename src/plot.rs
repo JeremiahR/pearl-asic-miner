@@ -147,6 +147,21 @@ impl Svg {
     }
 }
 
+const DARK_MEDIA: &str = "@media (prefers-color-scheme: dark) { ";
+
+/// The same SVG with the dark palette applied unconditionally (for PNG renders,
+/// which have no `prefers-color-scheme`).
+pub fn dark_variant(svg: &str) -> String {
+    match svg.find(DARK_MEDIA) {
+        Some(i) => {
+            let rest = &svg[i + DARK_MEDIA.len()..];
+            let end = rest.find(" }</style>").expect("dark media block closes before </style>");
+            format!("{}{}{}", &svg[..i], &rest[..end], &rest[end + 2..])
+        }
+        None => svg.to_string(),
+    }
+}
+
 #[derive(Clone, Copy)]
 pub struct LogAxis {
     pub lo: f64,

@@ -132,13 +132,23 @@ The 1% overhead is a planning figure. Cost of the recommended PA-2 relative to t
 Requires Rust 1.85+ (edition 2024). The first test build fetches Pearl's `zk-pow` from GitHub as the oracle; it is pinned to commit `630b7316`.
 
 ```bash
+cargo build                     # also regenerates ALL docs artifacts from the model (see below)
 cargo test --release            # model vs Pearl's verifier, bit-exact
 cargo run --release             # full report tables: activity, gate inventory, corners, economics
 cargo run --release -- sweep    # voltage sweep -> cost-optimal operating point
-cargo run --release -- figures  # regenerate docs/figures/*.svg|csv and docs/designs.md
+cargo run --release -- figures  # regenerate SVG/CSV/designs.md only (no PNGs)
 cargo run --release -- demo     # stream tiles through a core, hash tickets, count hits
 cargo doc --open                # API docs for the model
 ```
+
+### Rebuilding the docs
+
+`cargo build` runs `build.rs`, which compiles the same model sources and regenerates:
+- `docs/figures/*.svg` and the `*.csv` table views;
+- `docs/figures/*.png` and `*-dark.png` (2x renders, drawn in pure Rust with `resvg`; no external tools);
+- `docs/designs.md`.
+
+The output is deterministic, since the simulation is seeded. It reruns whenever a model source changes. To force it, run `touch build.rs`. To skip it, run with `PEARL_SKIP_DOCS=1 cargo build`.
 
 ## Repository layout
 
@@ -152,6 +162,7 @@ cargo doc --open                # API docs for the model
 | `src/figures.rs`, `src/plot.rs` | Dependency-free SVG figure and CSV table generator; also writes `docs/designs.md` |
 | `src/econ.rs` | USD per EFLOP for ASIC, pure-GPU and inference-GPU miners |
 | `src/main.rs` | CLI: `report`, `sweep`, `figures`, `demo` |
+| `build.rs` | Regenerates every docs artifact (SVG, CSV, PNG, `designs.md`) on `cargo build` |
 | `tests/oracle.rs` | Bit-exactness tests against `zk-pow` |
 | `docs/REPORT.md` | **The full design report** |
 | `docs/designs.md` | Generated spec sheet for each design version, compared with the GPUs |

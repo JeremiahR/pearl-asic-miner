@@ -13,9 +13,22 @@ publish = false
 blake3 = "1.8"
 rand = "0.9"
 
+[build-dependencies]
+# build.rs compiles the model and regenerates docs/ (figures, CSVs, PNGs, designs.md).
+blake3 = "1.8"
+rand = "0.9"
+resvg = "0.45"
+
 [dev-dependencies]
 # Oracle: Pearl's own FP8 verifier, pinned to the fp8-scheme commit this model was written against.
 zk-pow = { git = "https://github.com/pearl-research-labs/pearl", rev = "630b731641ef31d706634b3baf3838369cb2d204" }
+
+# Optimise the build script and its deps: it runs the activity simulation and renders PNGs.
+[profile.dev.build-override]
+opt-level = 3
+
+[profile.release.build-override]
+opt-level = 3
 
 [profile.release]
 debug = false
