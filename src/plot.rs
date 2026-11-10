@@ -17,6 +17,7 @@ struct Tokens {
     grid: &'static str,
     base: &'static str,
     series: [&'static str; 4],
+    ink_strong: &'static str,
     wash: &'static str,
 }
 
@@ -28,6 +29,7 @@ const LIGHT: Tokens = Tokens {
     grid: "#e1e0d9",
     base: "#c3c2b7",
     series: ["#2a78d6", "#eb6834", "#1baf7a", "#eda100"],
+    ink_strong: "#0b0b0b",
     wash: "rgba(11,11,11,0.05)",
 };
 
@@ -39,6 +41,7 @@ const DARK: Tokens = Tokens {
     grid: "#2c2c2a",
     base: "#383835",
     series: ["#3987e5", "#d95926", "#199e70", "#c98500"],
+    ink_strong: "#f0efec",
     wash: "rgba(255,255,255,0.06)",
 };
 
@@ -50,7 +53,10 @@ fn color_rules(t: &Tokens) -> String {
         ".bg{{fill:{sf}}} .title,.lab,.val{{fill:{i1}}} .sub,.lab2{{fill:{i2}}} .tick,.note{{fill:{mu}}} \
          .grid{{stroke:{gr}}} .base{{stroke:{ba}}} .ref{{stroke:{i2}}} .wash{{fill:{wa}}} .ring{{stroke:{sf}}} \
          .f1{{fill:{s1}}} .f2{{fill:{s2}}} .f3{{fill:{s3}}} .f4{{fill:{s4}}} \
-         .l1,.w1{{stroke:{s1}}} .l2,.w2{{stroke:{s2}}}",
+         .l1,.w1{{stroke:{s1}}} .l2,.w2{{stroke:{s2}}} .l3{{stroke:{s3}}} \
+         .b1{{fill:{s1};fill-opacity:0.2}} .b2{{fill:{s2};fill-opacity:0.2}} .b3{{fill:{s3};fill-opacity:0.2}} \
+         .refbold{{stroke:{is}}} .strong{{fill:{is}}}",
+        is = t.ink_strong,
         sf = t.surface, i1 = t.ink1, i2 = t.ink2, mu = t.muted, gr = t.grid, ba = t.base, wa = t.wash
     )
 }
@@ -61,7 +67,8 @@ fn style() -> String {
          .lab{{font-size:12px}} .lab2{{font-size:11px}} .val{{font-size:11.5px;font-variant-numeric:tabular-nums}} \
          .tick{{font-size:11px;font-variant-numeric:tabular-nums}} .note{{font-size:11px}} \
          .grid,.base,.ref{{stroke-width:1}} .ring{{stroke-width:2}} \
-         .l1,.l2{{stroke-width:2;fill:none;stroke-linejoin:round;stroke-linecap:round}} \
+         .l1,.l2,.l3{{stroke-width:2;fill:none;stroke-linejoin:round;stroke-linecap:round}} \
+         .refbold{{stroke-width:2.5}} .strong{{font-size:12.5px;font-weight:600}} .b1,.b2,.b3{{stroke:none}} \
          .w1,.w2{{stroke-width:2;stroke-linecap:round}}\n{}\n@media (prefers-color-scheme: dark) {{ {} }}",
         color_rules(&LIGHT),
         color_rules(&DARK)
@@ -114,6 +121,10 @@ impl Svg {
     pub fn polyline(&mut self, pts: &[(f64, f64)], class: &str) {
         let p: Vec<String> = pts.iter().map(|(x, y)| format!("{x:.1},{y:.1}")).collect();
         let _ = writeln!(self.body, r#"<polyline points="{}" class="{class}"/>"#, p.join(" "));
+    }
+    pub fn polygon(&mut self, pts: &[(f64, f64)], class: &str) {
+        let p: Vec<String> = pts.iter().map(|(x, y)| format!("{x:.1},{y:.1}")).collect();
+        let _ = writeln!(self.body, r#"<polygon points="{}" class="{class}"/>"#, p.join(" "));
     }
     /// Legend row of (fill class, label) swatches starting at (x, y).
     pub fn legend(&mut self, x: f64, y: f64, items: &[(&str, &str)]) {

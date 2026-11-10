@@ -406,6 +406,103 @@ fn fig_overhead(res: &Results) -> (String, String) {
     (svg.finish("Inference-GPU marginal cost at 1-5% mining overhead vs ASIC design versions"), csv)
 }
 
+/// Headline figure: effective Pearl efficiency of frontier NVIDIA GPUs mining
+/// as a by-product of inference (wall TFLOPS/W / overhead) vs our ASICs.
+fn fig_frontier(res: &Results) -> (String, String) {
+    let fams = energy::frontier_gpus();
+    let pa2 = res.designs.iter().find(|d| d.design.version == "PA-2").unwrap();
+    let pa3 = res.designs.iter().find(|d| d.design.version == "PA-3").unwrap();
+    let e_pa2 = pa2.r.tflops_per_w_wall;
+    let e_pa3 = pa3.r.tflops_per_w_wall;
+    // All-in: total USD/EFLOP converted to the energy-equivalent TFLOPS/W.
+    let j_per_eflop = pa2.cost.total() / (res.market.usd_per_kwh / 3.6e6);
+    let e_pa2_allin = 1e6 / j_per_eflop;
+
+    let (w, h) = (820.0, 600.0);
+    let mut svg = Svg::new(w, h, "The bar our best ASIC must clear moves with Pearl's overhead, and with every NVIDIA generation",
+        "Effective Pearl efficiency of a GPU already doing FP8 inference = wall TFLOPS/W ÷ mining overhead. Labels: 1% → 5%. Log scale.");
+    svg.legend(20.0, 72.0, &[("f1", "Hopper H100/H200"), ("f2", "Blackwell B200/B300/GB200"), ("f3", "Rubin VR200 (announced)")]);
+    let (l, r, t, b) = (70.0, w - 230.0, 100.0, h - 110.0);
+    let x = LinAxis { lo: 0.01, hi: 0.05, a: l, b: r };
+    let y = LogAxis { lo: 20.0, hi: 1000.0, a: b, b: t };
+    // Regions relative to the PA-2 line.
+    let ya = y.map(e_pa2);
+    svg.rect(l, ya, r - l, b - ya, 0.0, "wash");
+    svg.text(r - 8.0, b - 10.0, "below the bold line: our ASIC is more efficient", "note", "end");
+    svg.text(r - 8.0, t + 14.0, "above it: inference GPUs mine Pearl more efficiently", "note", "end");
+    for v in [20.0, 50.0, 100.0, 200.0, 500.0, 1000.0] {
+        svg.line(l, y.map(v), r, y.map(v), "grid");
+        svg.text(l - 8.0, y.map(v) + 4.0, &format!("{v:.0}"), "tick", "end");
+    }
+    for o in OVERHEADS {
+        svg.text(x.map(o), b + 16.0, &format!("{:.0}%", o * 100.0), "tick", "middle");
+    }
+    svg.line(l, b, r, b, "base");
+    svg.text(r, b + 34.0, "Pearl mining overhead on an inference GPU", "note", "end");
+    svg.text(l - 8.0, t - 12.0, "effective TFLOPS/W", "note", "start");
+
+    // ASIC reference lines.
+    let refs = [
+        (e_pa3, format!("PA-3 stretch: {:.0} TF/W", e_pa3), "ref", "lab2"),
+        (e_pa2, format!("Our best ASIC (PA-2): {:.0} TF/W", e_pa2), "refbold", "strong"),
+        (e_pa2_allin, format!("PA-2 incl. chip capex: ~{:.0} TF/W-eq.", e_pa2_allin), "ref", "lab2"),
+    ];
+    for (v, label, lc, tc) in &refs {
+        svg.line(l, y.map(*v), r, y.map(*v), lc);
+        svg.text(r + 8.0, y.map(*v) + 4.0, label, tc, "start");
+    }
+
+    let mut csv = String::from("family,members,overhead_pct,effective_tflops_per_w_low,effective_tflops_per_w_high,vs_pa2_energy_low,vs_pa2_energy_high\n");
+    let mut notes = Vec::new();
+    for (i, f) in fams.iter().enumerate() {
+        let (lc, bc, fc) = [("l1", "b1", "f1"), ("l2", "b2", "f2"), ("l3", "b3", "f3")][i];
+        let lo: Vec<(f64, f64)> = OVERHEADS.iter().map(|&o| (x.map(o), y.map(f.wall_tfw_lo / o))).collect();
+        let hi: Vec<(f64, f64)> = OVERHEADS.iter().map(|&o| (x.map(o), y.map(f.wall_tfw_hi / o))).collect();
+        // Smooth curve: sample finely.
+        let n = 40;
+        let curve = |e: f64| -> Vec<(f64, f64)> {
+            (0..=n).map(|j| { let o = 0.01 + 0.04 * j as f64 / n as f64; (x.map(o), y.map(e / o)) }).collect()
+        };
+        if f.wall_tfw_hi > f.wall_tfw_lo * 1.001 {
+            let mut band = curve(f.wall_tfw_hi);
+            band.extend(curve(f.wall_tfw_lo).into_iter().rev());
+            svg.polygon(&band, bc);
+        }
+        let mid = (f.wall_tfw_lo * f.wall_tfw_hi).sqrt();
+        svg.polyline(&curve(mid), lc);
+        for (&o, (pl, ph)) in OVERHEADS.iter().zip(lo.iter().zip(&hi)) {
+            let _ = writeln!(csv, "{},{},{:.0},{:.1},{:.1},{:.2},{:.2}", f.name, f.members, o * 100.0, f.wall_tfw_lo / o, f.wall_tfw_hi / o, f.wall_tfw_lo / o / e_pa2, f.wall_tfw_hi / o / e_pa2);
+            let _ = (pl, ph);
+        }
+        // Curve labels placed where no line crosses the text.
+        let label = format!("{}: {:.0} → {:.0} TF/W", f.name, mid / 0.01, mid / 0.05);
+        match i {
+            0 => svg.text(x.map(0.029), y.map(f.wall_tfw_lo / 0.029) + 18.0, &label, "val", "end"),
+            1 => svg.text(x.map(0.040), y.map(f.wall_tfw_hi / 0.040) - 10.0, &label, "val", "start"),
+            _ => svg.text(x.map(0.013), y.map(f.wall_tfw_hi / 0.013) - 10.0, &format!("{label} (power unconfirmed)"), "val", "start"),
+        }
+        // Crossover with the PA-2 line (overhead where GPU effective = PA-2).
+        let (c_lo, c_hi) = (f.wall_tfw_lo / e_pa2, f.wall_tfw_hi / e_pa2);
+        if c_lo <= 0.05 {
+            let cx = x.map((c_lo * c_hi).sqrt());
+            svg.dot(cx, ya, 5.5, fc);
+            let txt = if (c_hi - c_lo) / c_lo < 0.02 { format!("{:.1}%", c_lo * 100.0) } else { format!("{:.1}–{:.1}%", c_lo * 100.0, c_hi * 100.0) };
+            svg.text(cx, ya + 18.0, &txt, "val", "middle");
+        }
+        notes.push(format!("{}: {:.1}–{:.1} wall TF/W ({})", f.members, f.wall_tfw_lo, f.wall_tfw_hi, f.basis));
+    }
+    let rubin = &fams[2];
+    svg.text(20.0, h - 40.0,
+        &format!("Rubin stays above our best ASIC at every overhead up to 5% (it would cross at {:.1}–{:.1}%). Dots mark where each GPU family falls below PA-2.",
+            rubin.wall_tfw_lo / e_pa2 * 100.0, rubin.wall_tfw_hi / e_pa2 * 100.0), "lab", "start");
+    svg.text(20.0, h - 20.0, "Energy only, GPUs at nameplate dense FP8. Counting ASIC chip capex (PA-2 all-in line), even an H100 wins up to ~4.7% overhead.", "note", "start");
+    let _ = h;
+    for n in notes {
+        let _ = writeln!(csv, "# {n}");
+    }
+    (svg.finish("Effective Pearl efficiency of frontier NVIDIA GPUs at 1-5% overhead vs our best ASIC"), csv)
+}
+
 // ---------------------------------------------------------------------------
 
 pub fn designs_markdown(res: &Results) -> String {
@@ -493,6 +590,9 @@ pub fn write_all(dir: &Path) -> std::io::Result<Results> {
     let (svg, csv) = fig_breakdown(&res);
     put("energy-breakdown.svg", &svg)?;
     put("energy-breakdown.csv", &csv)?;
+    let (svg, csv) = fig_frontier(&res);
+    put("frontier-gpus-vs-asic.svg", &svg)?;
+    put("frontier-gpus-vs-asic.csv", &csv)?;
     let (svg, csv) = fig_overhead(&res);
     put("overhead-sensitivity.svg", &svg)?;
     put("overhead-sensitivity.csv", &csv)?;

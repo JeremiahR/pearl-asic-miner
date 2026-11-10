@@ -304,6 +304,53 @@ pub fn gpus() -> Vec<Gpu> {
     ]
 }
 
+/// A frontier NVIDIA GPU family for the effective-efficiency comparison.
+/// `lo`/`hi` give the family's spread (members or unconfirmed power) as wall
+/// TFLOPS/W; dense FP8 only.
+#[derive(Clone, Debug)]
+pub struct GpuFamily {
+    pub name: &'static str,
+    pub members: &'static str,
+    pub wall_tfw_lo: f64,
+    pub wall_tfw_hi: f64,
+    pub basis: &'static str,
+}
+
+/// Board power -> wall power ratio of GB200 NVL72 (1.87 kW all-in / 1.2 kW).
+const RACK_WALL_RATIO: f64 = 1870.0 / 1200.0;
+
+pub fn frontier_gpus() -> Vec<GpuFamily> {
+    let hopper = 1979.0 / (10_200.0 / 8.0);
+    let b200: f64 = 4500.0 / (14_300.0 / 8.0);
+    let b300 = 4500.0 / (14_000.0 / 8.0);
+    let gb200 = 5000.0 / 1870.0;
+    let rubin_hi = 17_500.0 / (1800.0 * RACK_WALL_RATIO);
+    let rubin_lo = 17_500.0 / (2300.0 * RACK_WALL_RATIO);
+    vec![
+        GpuFamily {
+            name: "Hopper",
+            members: "H100 / H200",
+            wall_tfw_lo: hopper,
+            wall_tfw_hi: hopper,
+            basis: "1,979 TF dense FP8; DGX H100/H200 10.2 kW / 8",
+        },
+        GpuFamily {
+            name: "Blackwell",
+            members: "B200 / B300 / GB200",
+            wall_tfw_lo: b200.min(b300).min(gb200),
+            wall_tfw_hi: b200.max(b300).max(gb200),
+            basis: "B200 4.5 PF, DGX 14.3 kW/8; B300 4.5 PF, DGX 14 kW/8; GB200 5 PF, 1.87 kW all-in",
+        },
+        GpuFamily {
+            name: "Rubin (announced)",
+            members: "VR200",
+            wall_tfw_lo: rubin_lo,
+            wall_tfw_hi: rubin_hi,
+            basis: "17.5 PF dense FP8; 1.8-2.3 kW board (unconfirmed) x GB200 wall ratio",
+        },
+    ]
+}
+
 impl Gpu {
     pub fn tflops_per_w_board(&self) -> f64 {
         self.dense_fp8_tflops / self.board_w

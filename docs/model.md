@@ -69,6 +69,16 @@ All versions use `n_chip = 2048` columns, k = 2048, and 15% non-array die area.
 
 These use nameplate throughput, which flatters the GPU. The 2:4-sparse peak is excluded because the liveness rule rejects structured sparsity.
 
+### Frontier families (`energy::frontier_gpus()`, headline figure)
+
+| family | members | wall TFLOPS/W | basis |
+|---|---|---|---|
+| Hopper | H100 / H200 | 1.55 | 1,979 TF; DGX 10.2 kW / 8 |
+| Blackwell | B200 / B300 / GB200 | 2.52–2.67 | 4.5 / 4.5 / 5.0 PF; DGX 14.3 kW/8, DGX 14 kW/8, 1.87 kW all-in |
+| Rubin (announced) | VR200 | 4.9–6.2 | 17.5 PF; 1.8–2.3 kW board (unconfirmed) × GB200 wall/board ratio 1.56 |
+
+Effective Pearl efficiency for an inference GPU = wall TFLOPS/W ÷ overhead. The ASIC's "all-in" line converts its total USD/EFLOP (energy + capex) into the energy-equivalent TFLOPS/W at the same electricity price.
+
 ## 7. Economics (`econ::Market`)
 
 Defaults: $0.05/kWh, 3 years, 95% uptime, 1% inference overhead, $10 package per die, $0.80/W for system hardware, 80% die yield, 300 mm wafers with 12% edge loss.

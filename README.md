@@ -33,6 +33,15 @@ Silicon, not electricity, dominates ASIC cost. That is why the cost-optimal desi
 
 Bottom line: our best practical Pearl ASIC is ~61x more energy-efficient than an H100. But a GPU mining as a 1% by-product of AI inference still produces Pearl work ~4.7x cheaper than that ASIC. The ASIC only breaks even if mining overhead reaches ~4.7%.
 
+![Effective Pearl efficiency of frontier NVIDIA GPUs vs our best ASIC](docs/figures/frontier-gpus-vs-asic.svg)
+
+*How to read this chart:*
+- A GPU already doing paid FP8 inference spends only the overhead share of its power on mining, so its effective Pearl efficiency is its wall TFLOPS/W ÷ overhead.
+- At 1% overhead every NVIDIA generation beats our best ASIC (PA-2). Hopper drops below it at 1.6% and Blackwell at 2.7–2.8%.
+- Rubin stays above it all the way to 5%. Each new GPU generation raises the bar.
+- Counting the ASIC's own chip cost (the lower "all-in" line), even an H100 wins up to ~4.7%.
+- The data is in [frontier-gpus-vs-asic.csv](docs/figures/frontier-gpus-vs-asic.csv).
+
 ---
 
 ## Key findings
