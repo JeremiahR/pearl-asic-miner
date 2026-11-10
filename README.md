@@ -31,7 +31,7 @@ Economically, the ASIC is 300–400x cheaper per unit of work than GPUs bought t
 
 Silicon, not electricity, dominates ASIC cost. That is why the cost-optimal design sits at ~60–80x efficiency rather than the maximum.
 
-We conclude that a Pearl FP8 ASIC is technically feasible and would dominate dedicated GPU mining. It cannot undercut inference-mined hashes at low overhead, though. Its viability depends on mining overhead, the size of the inference fleet running Pearl, and, above all, protocol stability: four consensus forks in three months, against an 18-month tape-out.
+Bottom line: our best practical Pearl ASIC is ~61x more energy-efficient than an H100. But a GPU mining as a 1% by-product of AI inference still produces Pearl work ~4.7x cheaper than that ASIC. The ASIC only breaks even if mining overhead reaches ~4.7%.
 
 ---
 
